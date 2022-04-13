@@ -1,4 +1,4 @@
-# URLShortner
+# URL Shortner
 URL Shortner to reduce long urls
 Url shortener is a service that creates a short & unique alias for links of very high size. 
 
