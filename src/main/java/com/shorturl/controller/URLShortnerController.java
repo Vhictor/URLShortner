@@ -27,6 +27,11 @@ public class URLShortnerController {
         this.urlConverterService = urlConverterService;
     }
 
+    @RequestMapping("/")
+    public String home(){
+        return "Welcome to Url Shortner";
+    }
+
     @RequestMapping(value = "/shortener", method= RequestMethod.POST, consumes = {"application/json"})
     public String shortenUrl(@RequestBody @Valid final ShortenRequestData shortenRequest, HttpServletRequest request) throws Exception {
         LOGGER.info("Received url to shorten: " + shortenRequest.getUrl());
@@ -41,11 +46,11 @@ public class URLShortnerController {
     }
 
     @RequestMapping(value = "/{id}", method=RequestMethod.GET)
-    public RedirectView redirectUrl(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException, Exception {
+    public RedirectView redirectUrl(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         LOGGER.debug("Received shortened url to redirect: " + id);
         String redirectUrlString = urlConverterService.getLongURLFromID(id);
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://" + redirectUrlString);
+        redirectView.setUrl("https://" + redirectUrlString);
         return redirectView;
     }
 }
